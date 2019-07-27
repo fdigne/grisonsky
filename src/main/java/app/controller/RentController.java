@@ -2,11 +2,8 @@ package app.controller;
 
 import app.service.RentService;
 import app.domain.Rent;
-import app.dto.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,9 +16,25 @@ public class RentController {
 	private RentService rentService;
 
 	@GetMapping(value="/all")
-	List<Rent> all() {
+	public List<Rent> all() {
 		return this.rentService.getAll();
 	}
+
+	@GetMapping(value="/{id}")
+	public Rent getOne(@PathVariable Long id) {
+		return this.rentService.getOne(id);
+	}
+
+	@PostMapping(value="/save")
+	public Rent saveRent(@RequestBody Rent rent) {
+		return this.rentService.saveRent(rent);
+	}
+
+	@DeleteMapping(value="/{id}")
+	public String deleteRent(@PathVariable Long id) {
+		return this.rentService.deleteRent(id);
+	}
+
 
 
 }
