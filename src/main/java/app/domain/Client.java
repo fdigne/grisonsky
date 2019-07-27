@@ -1,12 +1,14 @@
-package domain;
+package app.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Table;
 import javax.persistence.Id;
 import java.io.Serializable;
 
 @Entity
+@Table(name="Client")
 public class Client implements Serializable {
 
     @Id
