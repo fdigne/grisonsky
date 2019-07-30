@@ -36,10 +36,10 @@ public class Rent implements Serializable {
     @Column(name="comments")
     private String comments;
 
-    public Rent() {
-    }
+    @ManyToOne
+    private Renter renter ;
 
-    public Rent(app.domain.Client client, app.domain.Period period, int nbClient, boolean cleaning, String site, float price, String comments) {
+    public Rent(Client client, Period period, int nbClient, boolean cleaning, String site, float price, String comments, Renter renter) {
         this.client = client;
         this.period = period;
         this.nbClient = nbClient;
@@ -47,6 +47,10 @@ public class Rent implements Serializable {
         this.site = site;
         this.price = price;
         this.comments = comments;
+        this.renter = renter;
+    }
+
+    public Rent() {
     }
 
     public Long getId() {
@@ -111,5 +115,13 @@ public class Rent implements Serializable {
 
     public void setComments(String comments) {
         this.comments = comments;
+    }
+
+    public Renter getRenter() {
+        return renter;
+    }
+
+    public void setRenter(Renter renter) {
+        this.renter = renter;
     }
 }
