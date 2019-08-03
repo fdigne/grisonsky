@@ -27,11 +27,17 @@ public class Rent implements Serializable {
     @Column(name="cleaning")
     private boolean cleaning;
 
+    @Column(name="parking")
+    private boolean parking;
+
     @Column(name="site")
     private String site;
 
     @Column(name="price")
     private float price;
+
+    @Column(name="appartment")
+    private String appartment;
 
     @Column(name="comments")
     private String comments;
@@ -39,12 +45,14 @@ public class Rent implements Serializable {
     @ManyToOne
     private Renter renter ;
 
-    public Rent(Client client, Period period, int nbClient, boolean cleaning, String site, float price, String comments, Renter renter) {
+    public Rent(Client client, Period period, int nbClient, boolean cleaning, boolean parking, String site, String appartment, float price, String comments, Renter renter) {
         this.client = client;
         this.period = period;
         this.nbClient = nbClient;
         this.cleaning = cleaning;
+        this.parking = parking;
         this.site = site;
+        this.appartment = appartment;
         this.price = price;
         this.comments = comments;
         this.renter = renter;
@@ -123,5 +131,21 @@ public class Rent implements Serializable {
 
     public void setRenter(Renter renter) {
         this.renter = renter;
+    }
+
+    public boolean isParking() {
+        return parking;
+    }
+
+    public void setParking(boolean parking) {
+        this.parking = parking;
+    }
+
+    public String getAppartment() {
+        return appartment;
+    }
+
+    public void setAppartment(String appartment) {
+        this.appartment = appartment;
     }
 }
