@@ -13,28 +13,28 @@ import java.util.List;
 public class RentController {
 
 
-	@Autowired
-	private RentService rentService;
+    @Autowired
+    private RentService rentService;
 
-	@GetMapping(value="/all")
-	public List<Rent> all() {
-		return this.rentService.getAll();
-	}
+    @GetMapping(value="/all")
+    public List<Rent> all() {
+        return this.rentService.getAll();
+    }
 
-	@GetMapping(value="/{id}")
-	public Rent getOne(@PathVariable Long id) {
-		return this.rentService.getOne(id);
-	}
+    @GetMapping(value="/{id}")
+    public Rent getOne(@PathVariable Long id) {
+        return this.rentService.getOne(id);
+    }
 
-	@PostMapping(value="/save")
-	public Rent saveRent(@RequestBody Rent rent) {
-		return this.rentService.saveRent(rent);
-	}
+    @PostMapping(value="/save")
+    public Rent saveRent(@RequestBody Rent rent) {
+        return this.rentService.saveRent(rent);
+    }
 
-	@DeleteMapping(value="/{id}")
-	public String deleteRent(@PathVariable Long id) {
-		return this.rentService.deleteRent(id);
-	}
+    @DeleteMapping(value="/{id}")
+    public String deleteRent(@PathVariable Long id) {
+        return this.rentService.deleteRent(id);
+    }
 
 
 

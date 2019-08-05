@@ -13,10 +13,10 @@ INSERT INTO period(id, start_date, end_date) VALUES (2, '2019-09-01', '2019-10-0
 INSERT INTO period(id, start_date, end_date) VALUES (3, '2019-07-09', '2019-08-10');
 INSERT INTO period(id, start_date, end_date) VALUES (4, '2019-07-25', '2019-08-30');
 
-INSERT INTO rent(id, cleaning, comments, nb_client, price, site, client_id, period_id, renter_id) VALUES (1, true, 'blabla', 4, 404.32, 'AIRBNB', 1, 1, 1);
-INSERT INTO rent(id, cleaning, comments, nb_client, price, site, client_id, period_id, renter_id) VALUES (2, true, 'blabla', 3, 400.32, 'AIRBNB', 2, 2, 2);
-INSERT INTO rent(id, cleaning, comments, nb_client, price, site, client_id, period_id, renter_id) VALUES (3, true, 'blabla', 1, 600, 'AIRBNB', 3, 3, 3);
-INSERT INTO rent(id, cleaning, comments, nb_client, price, site, client_id, period_id, renter_id) VALUES (4, true, 'blabla', 4, 404.72, 'AIRBNB', 4, 4, 4);
+INSERT INTO rent(id, cleaning, parking, appartment, comments, nb_client, price, site, client_id, period_id, renter_id) VALUES (1, true, true, '209', 'blabla', 4, 404.32, 'AIRBNB', 1, 1, 1);
+INSERT INTO rent(id, cleaning, parking, appartment, comments, nb_client, price, site, client_id, period_id, renter_id) VALUES (2, true, true, '125','blabla', 3, 400.32, 'AIRBNB', 2, 2, 2);
+INSERT INTO rent(id, cleaning, parking, appartment, comments, nb_client, price, site, client_id, period_id, renter_id) VALUES (3, true, false, '208','blabla', 1, 600, 'AIRBNB', 3, 3, 3);
+INSERT INTO rent(id, cleaning, parking, appartment, comments, nb_client, price, site, client_id, period_id, renter_id) VALUES (4, true, true, '209','blabla', 4, 404.72, 'AIRBNB', 4, 4, 4);
 
 
 
