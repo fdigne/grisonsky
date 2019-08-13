@@ -2,6 +2,7 @@ package app.service;
 
 import app.dao.ClientDao;
 import app.dao.PeriodDao;
+import app.dao.RenterDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +25,9 @@ public class RentService {
     private ClientDao clientDao;
 
     @Autowired
+    private RenterDao renterDao;
+
+    @Autowired
     private PeriodDao periodDao;
 
     public List<Rent> getAll() {
@@ -37,11 +41,11 @@ public class RentService {
     public Rent saveRent(Rent rent) {
         rent.setClient(this.clientDao.save(rent.getClient()));
         rent.setPeriod(this.periodDao.save(rent.getPeriod()));
+        rent.setRenter(this.renterDao.save(rent.getRenter()));
         return this.rentDao.save(rent);
     }
 
-    public String deleteRent(Long id) {
+    public void deleteRent(Long id) {
         this.rentDao.delete(id);
-        return "Rent deleted";
     }
 }

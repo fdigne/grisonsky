@@ -3,6 +3,7 @@ package app.controller;
 import app.service.RentService;
 import app.domain.Rent;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,8 +33,9 @@ public class RentController {
     }
 
     @DeleteMapping(value="/{id}")
-    public String deleteRent(@PathVariable Long id) {
-        return this.rentService.deleteRent(id);
+    public ResponseEntity deleteRent(@PathVariable Long id) {
+        this.rentService.deleteRent(id);
+        return ResponseEntity.noContent().build();
     }
 
 

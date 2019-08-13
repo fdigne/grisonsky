@@ -1,7 +1,7 @@
-INSERT INTO client(id, first_name, name, phone_number) VALUES (1, 'toto', 'titi', '0676876543');
-INSERT INTO client(id, first_name, name, phone_number) VALUES (2, 'tutu', 'tonton', '0676876543');
-INSERT INTO client(id, first_name, name, phone_number) VALUES (3, 'eeee', 'ttmtm', '0676876543');
-INSERT INTO client(id, first_name, name, phone_number) VALUES (4, 'pppp', 'oioio', '0676876543');
+INSERT INTO client(id, name, phone_number) VALUES (1, 'titi', '0676876543');
+INSERT INTO client(id, name, phone_number) VALUES (2, 'tonton', '0676876543');
+INSERT INTO client(id, name, phone_number) VALUES (3, 'ttmtm', '0676876543');
+INSERT INTO client(id, name, phone_number) VALUES (4, 'oioio', '0676876543');
 
 INSERT INTO renter(id, appartments, name) VALUES (1, '209', 'florian');
 INSERT INTO renter(id, appartments, name) VALUES (2, '126', 'guigui');
