@@ -22,7 +22,7 @@ public class Renter implements Serializable {
     public Renter() {
     }
 
-    public Renter(String name, String firstName, String phoneNumber, String appartments) {
+    public Renter(String name, String appartments) {
         this.name = name;
         this.appartments = appartments;
     }
