@@ -17,9 +17,9 @@ public class RentController {
     @Autowired
     private RentService rentService;
 
-    @GetMapping(value="/all")
-    public List<Rent> all() {
-        return this.rentService.getAll();
+    @GetMapping(value="/all/{id}")
+    public List<Rent> getRentsByRenterId(@PathVariable Long id) {
+        return this.rentService.getRentsByRenterId(id);
     }
 
     @GetMapping(value="/{id}")

@@ -1,6 +1,5 @@
 package app.domain;
 
-import app.domain.Client;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
