@@ -18,7 +18,7 @@ INSERT INTO rent(id, cleaning, parking, appartment, comments, nb_client, price, 
 INSERT INTO rent(id, cleaning, parking, appartment, comments, nb_client, price, site, client_id, period_id, renter_id) VALUES (3, true, false, '208','blabla', 1, 600, 'AIRBNB', 3, 3, 3);
 INSERT INTO rent(id, cleaning, parking, appartment, comments, nb_client, price, site, client_id, period_id, renter_id) VALUES (4, true, true, '209','blabla', 4, 404.72, 'AIRBNB', 4, 4, 4);
 
-
+INSERT INTO modification(renter_id, message, date) VALUES (1, "Initial", "2019-08-15 11:44:13");
 
 
 

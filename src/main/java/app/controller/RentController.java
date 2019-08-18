@@ -1,5 +1,7 @@
 package app.controller;
 
+import app.domain.Modification;
+import app.domain.Renter;
 import app.service.RentService;
 import app.domain.Rent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ public class RentController {
     private RentService rentService;
 
     @GetMapping(value="/all/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public List<Rent> getRentsByRenterId(@PathVariable Long id) {
         return this.rentService.getRentsByRenterId(id);
     }
@@ -27,14 +30,19 @@ public class RentController {
         return this.rentService.getOne(id);
     }
 
-    @PostMapping(value="/save")
-    public Rent saveRent(@RequestBody Rent rent) {
-        return this.rentService.saveRent(rent);
+    @GetMapping(value="/lastmodif")
+    public Modification getLastModif() {
+        return this.rentService.getLastModification();
     }
 
-    @DeleteMapping(value="/{id}")
-    public ResponseEntity deleteRent(@PathVariable Long id) {
-        this.rentService.deleteRent(id);
+    @PostMapping(value="/save/{userId}")
+    public Rent saveRent(@RequestBody Rent rent, @PathVariable Long userId) {
+        return this.rentService.saveRent(rent, userId);
+    }
+
+    @DeleteMapping(value="/{rentId}/{userId}")
+    public ResponseEntity deleteRent(@PathVariable Long rentId, @PathVariable Long userId) {
+        this.rentService.deleteRent(rentId, userId);
         return ResponseEntity.noContent().build();
     }
 
