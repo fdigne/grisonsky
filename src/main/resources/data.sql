@@ -3,10 +3,10 @@ INSERT INTO client(id, name, phone_number) VALUES (2, 'tonton', '0676876543');
 INSERT INTO client(id, name, phone_number) VALUES (3, 'ttmtm', '0676876543');
 INSERT INTO client(id, name, phone_number) VALUES (4, 'oioio', '0676876543');
 
-INSERT INTO renter(id, appartments, name, admin) VALUES (1, '209', 'florian', true);
-INSERT INTO renter(id, appartments, name, admin) VALUES (2, '126', 'guigui', false);
-INSERT INTO renter(id, appartments, name, admin) VALUES (3, '203', 'greg', false);
-INSERT INTO renter(id, appartments, name, admin) VALUES (4, '125;208;210', 'jules', true);
+INSERT INTO renter(id, appartments, name, password, admin) VALUES (1, '209', 'florian', 'florian', true);
+INSERT INTO renter(id, appartments, name, password, admin) VALUES (2, '126', 'guigui', 'guigui', false);
+INSERT INTO renter(id, appartments, name, password, admin) VALUES (3, '203', 'greg', 'greg', false);
+INSERT INTO renter(id, appartments, name, password, admin) VALUES (4, '125;208;210', 'jules', 'jules', true);
 
 INSERT INTO period(id, start_date, end_date) VALUES (1, '2019-07-01', '2019-08-01');
 INSERT INTO period(id, start_date, end_date) VALUES (2, '2019-09-01', '2019-10-01');

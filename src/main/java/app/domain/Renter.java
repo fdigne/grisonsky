@@ -17,6 +17,8 @@ public class Renter implements Serializable {
     @Column(name="name")
     private String name;
 
+    @Column(name="password")
+    private String password;
 
     @Column(name="appartments")
     private String appartments;
@@ -64,5 +66,13 @@ public class Renter implements Serializable {
 
     public void setAdmin(boolean admin) {
         this.admin = admin;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
