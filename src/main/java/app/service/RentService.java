@@ -1,6 +1,7 @@
 package app.service;
 
 import app.dao.*;
+import app.domain.Bill;
 import app.domain.Modification;
 import app.domain.Renter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ import java.util.List;
 @Service
 @Transactional
 public class RentService {
+
+    private static final int CLEANING_PRICE = 50;
 
     @Autowired
     private RentDao rentDao;
@@ -53,12 +56,23 @@ public class RentService {
         rent.setPeriod(this.periodDao.save(rent.getPeriod()));
         rent.setRenter(this.renterDao.save(rent.getRenter()));
         Renter user = this.renterDao.findOne(userId);
+        Double oldService = this.rentDao.getServiceSumByRenterId(rent.getRenter().getId());
+        Double service = ((oldService != null ? oldService : 0) + rent.getPrice())*0.1;
+        int cleaning = (this.rentDao.getCleaningCountByRenterId(rent.getRenter().getId()) + (rent.isCleaning()?1:0))*CLEANING_PRICE;
+        rent.getRenter().getBill().setService(service);
+        rent.getRenter().getBill().setCleaning(cleaning);
         this.modificationDao.save(new Modification(user, "Nouvelle location ajoutée", new Date()));
         return this.rentDao.save(rent);
     }
 
     public void deleteRent(Long rentId, Long userId) {
         Renter renter = this.renterDao.findOne(userId);
+        Rent rent = this.rentDao.findOne(rentId);
+        Double oldService = this.rentDao.getServiceSumByRenterId(rent.getRenter().getId());
+        Double service = ((oldService != null ? oldService : 0) - rent.getPrice())*0.1;
+        int cleaning = (this.rentDao.getCleaningCountByRenterId(rent.getRenter().getId()) - (rent.isCleaning()?1:0))*CLEANING_PRICE;
+        rent.getRenter().getBill().setService(service);
+        rent.getRenter().getBill().setCleaning(cleaning);
         this.modificationDao.save(new Modification(renter, "Location supprimée", new Date()));
         this.rentDao.delete(rentId);
     }

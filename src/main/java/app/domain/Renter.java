@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name="Renter")
@@ -26,13 +27,17 @@ public class Renter implements Serializable {
     @Column(name="admin")
     private boolean admin;
 
+    @OneToOne
+    private Bill bill;
+
     public Renter() {
     }
 
-    public Renter(String name, String appartments, boolean admin) {
+    public Renter(String name, String appartments, boolean admin, Bill bill) {
         this.name = name;
         this.appartments = appartments;
         this.admin = admin;
+        this.bill = bill;
     }
 
     public Long getId() {
@@ -74,5 +79,13 @@ public class Renter implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Bill getBill() {
+        return bill;
+    }
+
+    public void setBill(Bill bill) {
+        this.bill = bill;
     }
 }

@@ -18,7 +18,8 @@ public class RenterService {
 
 
     public Renter getByName(String name) {
-        return this.renterDao.findByName(name);
+        Renter renter = this.renterDao.findByName(name);
+        return renter;
     }
 
     public Renter login(Login login) {
