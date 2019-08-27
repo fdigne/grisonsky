@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 
 
 @Service
@@ -20,6 +21,10 @@ public class RenterService {
     public Renter getByName(String name) {
         Renter renter = this.renterDao.findByName(name);
         return renter;
+    }
+
+    public List<Renter> getRenters(Long id) {
+        return this.renterDao.getRenters(id);
     }
 
     public Renter login(Login login) {

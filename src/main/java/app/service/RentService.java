@@ -50,31 +50,54 @@ public class RentService {
         return this.rentDao.getOne(id);
     }
 
+    public Rent updateRent(Rent rent) {
+        rent.setPaid(!rent.isPaid());
+        Rent savedRent = this.rentDao.save(rent);
+        Renter renter = savedRent.getRenter();
+        Bill bill = renter.getBill();
+        Double oldService = this.rentDao.getServiceSumByRenterId(rent.getRenter().getId(), new Date());
+        Double service = ((oldService != null ? oldService : 0))*0.1;
+        int cleaning = (this.rentDao.getCleaningCountByRenterId(rent.getRenter().getId(), new Date()))*CLEANING_PRICE;
+        bill.setService(service);
+        bill.setCleaning(cleaning);
+        renter.setBill(bill);
+        this.renterDao.save(renter);
+        return savedRent;
+    }
+
     public Rent saveRent(Rent rent, Long userId) {
 
         rent.setClient(this.clientDao.save(rent.getClient()));
         rent.setPeriod(this.periodDao.save(rent.getPeriod()));
         rent.setRenter(this.renterDao.save(rent.getRenter()));
         Renter user = this.renterDao.findOne(userId);
-        Double oldService = this.rentDao.getServiceSumByRenterId(rent.getRenter().getId());
-        Double service = ((oldService != null ? oldService : 0) + rent.getPrice())*0.1;
-        int cleaning = (this.rentDao.getCleaningCountByRenterId(rent.getRenter().getId()) + (rent.isCleaning()?1:0))*CLEANING_PRICE;
-        rent.getRenter().getBill().setService(service);
-        rent.getRenter().getBill().setCleaning(cleaning);
+        Bill bill = user.getBill();
+        Rent savedRent = this.rentDao.save(rent);
+        Double oldService = this.rentDao.getServiceSumByRenterId(rent.getRenter().getId(), new Date());
+        Double service = ((oldService != null ? oldService : 0))*0.1;
+        int cleaning = (this.rentDao.getCleaningCountByRenterId(rent.getRenter().getId(), new Date()))*CLEANING_PRICE;
+        bill.setService(service);
+        bill.setCleaning(cleaning);
+        user.setBill(bill);
+        this.renterDao.save(user);
         this.modificationDao.save(new Modification(user, "Nouvelle location ajoutée", new Date()));
-        return this.rentDao.save(rent);
+        return savedRent;
     }
 
     public void deleteRent(Long rentId, Long userId) {
-        Renter renter = this.renterDao.findOne(userId);
+        Renter user = this.renterDao.findOne(userId);
         Rent rent = this.rentDao.findOne(rentId);
-        Double oldService = this.rentDao.getServiceSumByRenterId(rent.getRenter().getId());
-        Double service = ((oldService != null ? oldService : 0) - rent.getPrice())*0.1;
-        int cleaning = (this.rentDao.getCleaningCountByRenterId(rent.getRenter().getId()) - (rent.isCleaning()?1:0))*CLEANING_PRICE;
-        rent.getRenter().getBill().setService(service);
-        rent.getRenter().getBill().setCleaning(cleaning);
-        this.modificationDao.save(new Modification(renter, "Location supprimée", new Date()));
+        Renter renter = rent.getRenter();
+        Bill bill = renter.getBill();
+        this.modificationDao.save(new Modification(user, "Location supprimée", new Date()));
         this.rentDao.delete(rentId);
+        Double oldService = this.rentDao.getServiceSumByRenterId(rent.getRenter().getId(), new Date());
+        Double service = ((oldService != null ? oldService : 0))*0.1;
+        int cleaning = (this.rentDao.getCleaningCountByRenterId(rent.getRenter().getId(), new Date()))*CLEANING_PRICE;
+        bill.setService(service);
+        bill.setCleaning(cleaning);
+        renter.setBill(bill);
+        this.renterDao.save(renter);
     }
 
     public Modification getLastModification() {

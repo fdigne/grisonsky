@@ -40,6 +40,11 @@ public class RentController {
         return this.rentService.saveRent(rent, userId);
     }
 
+    @PutMapping(value="")
+    public Rent putRent(@RequestBody Rent rent){
+        return this.rentService.updateRent(rent);
+    }
+
     @DeleteMapping(value="/{rentId}/{userId}")
     public ResponseEntity deleteRent(@PathVariable Long rentId, @PathVariable Long userId) {
         this.rentService.deleteRent(rentId, userId);

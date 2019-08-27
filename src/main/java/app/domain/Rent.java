@@ -44,7 +44,10 @@ public class Rent implements Serializable {
     @ManyToOne
     private Renter renter ;
 
-    public Rent(Client client, Period period, int nbClient, boolean cleaning, boolean parking, String site, String appartment, float price, String comments, Renter renter) {
+    @Column(name="ispaid")
+    private boolean paid;
+
+    public Rent(Client client, Period period, int nbClient, boolean cleaning, boolean parking, String site, String appartment, float price, String comments, Renter renter, boolean paid) {
         this.client = client;
         this.period = period;
         this.nbClient = nbClient;
@@ -55,6 +58,7 @@ public class Rent implements Serializable {
         this.price = price;
         this.comments = comments;
         this.renter = renter;
+        this.paid = paid;
     }
 
     public Rent() {
@@ -146,5 +150,13 @@ public class Rent implements Serializable {
 
     public void setAppartment(String appartment) {
         this.appartment = appartment;
+    }
+
+    public boolean isPaid() {
+        return paid;
+    }
+
+    public void setPaid(boolean paid) {
+        this.paid = paid;
     }
 }
