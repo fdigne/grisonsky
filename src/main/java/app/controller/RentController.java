@@ -40,14 +40,15 @@ public class RentController {
         return this.rentService.saveRent(rent, userId);
     }
 
-    @PutMapping(value="/pay")
-    public Rent payRent(@RequestBody Rent rent){
-        return this.rentService.updateRent(rent, true);
+    @PutMapping(value="/pay/{userId}")
+    public Rent payRent(@RequestBody Rent rent, @PathVariable Long userId){
+        return this.rentService.updateRent(rent, true, userId);
     }
 
-    @PutMapping(value="")
-    public Rent putRent(@RequestBody Rent rent){
-        return this.rentService.updateRent(rent, false);
+    @PutMapping(value="/{userId}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public Rent putRent(@RequestBody Rent rent, @PathVariable Long userId){
+        return this.rentService.updateRent(rent, false, userId);
     }
 
     @DeleteMapping(value="/{rentId}/{userId}")
