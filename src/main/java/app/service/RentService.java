@@ -50,8 +50,12 @@ public class RentService {
         return this.rentDao.getOne(id);
     }
 
-    public Rent updateRent(Rent rent) {
-        rent.setPaid(!rent.isPaid());
+    public Rent updateRent(Rent rent, boolean paid) {
+        if (paid) {
+            rent.setPaid(!rent.isPaid());
+        }
+        this.clientDao.save(rent.getClient());
+        this.periodDao.save(rent.getPeriod());
         Rent savedRent = this.rentDao.save(rent);
         Renter renter = savedRent.getRenter();
         Bill bill = renter.getBill();
@@ -62,6 +66,7 @@ public class RentService {
         bill.setCleaning(cleaning);
         renter.setBill(bill);
         this.renterDao.save(renter);
+        this.modificationDao.save(new Modification(renter, "Location modifiée", new Date()));
         return savedRent;
     }
 

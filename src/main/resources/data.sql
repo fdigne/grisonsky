@@ -20,7 +20,7 @@ INSERT INTO period(id, start_date, end_date) VALUES (4, '2019-07-25', '2019-08-3
 
 INSERT INTO rent(id, cleaning, parking, appartment, comments, nb_client, price, site, client_id, period_id, renter_id, ispaid) VALUES (1, true, true, '209', 'blabla', 4, 404.32, 'AIRBNB', 1, 1, 1, false);
 INSERT INTO rent(id, cleaning, parking, appartment, comments, nb_client, price, site, client_id, period_id, renter_id, ispaid) VALUES (2, true, true, '125','blabla', 3, 400.32, 'AIRBNB', 2, 2, 2, false);
-INSERT INTO rent(id, cleaning, parking, appartment, comments, nb_client, price, site, client_id, period_id, renter_id, ispaid) VALUES (3, true, false, '208','blabla', 1, 600, 'AIRBNB', 3, 3, 3, false);
+INSERT INTO rent(id, cleaning, parking, appartment, comments, nb_client, price, site, client_id, period_id, renter_id, ispaid) VALUES (3, true, false, '203','blabla', 1, 600, 'AIRBNB', 3, 3, 3, false);
 INSERT INTO rent(id, cleaning, parking, appartment, comments, nb_client, price, site, client_id, period_id, renter_id, ispaid) VALUES (4, true, true, '209','blabla', 4, 404.72, 'AIRBNB', 4, 4, 4, false);
 
 INSERT INTO modification(renter_id, message, date) VALUES (1, "Initial", "2019-08-15 11:44:13");
