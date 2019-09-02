@@ -27,9 +27,10 @@ import java.util.Properties;
 public class RentService {
 
     private static final int CLEANING_PRICE = 50;
-    private final String fromEmail = "fdigne@me.com"; //requires valid gmail id
-    private final String password = "Sdfdadvd31!"; // correct password for gmail id
+    private final String fromEmail = "grisonsky@gmail.com"; //requires valid gmail id
+    private final String password = "jlp_Grisonsky!"; // correct password for gmail id
     private final String toEmail = "fdigne@me.com"; //requires valid gmail id
+
 
 
     @Autowired
@@ -198,7 +199,7 @@ public class RentService {
 
         body += "Il y a eu du nouveau sur les locations de "+modification.getRenter().getName()+"<br/><br/>" ;
         body += "L'action suivante a été effectuée : "+modification.getMessage();
-        body += "Bises.<br/>Lord of Pibrac.<br/><br/><br/>";
+        body += "<br/><br/>Bises.<br/>Lord of Pibrac.<br/><br/><br/>";
         return body;
     }
 }
