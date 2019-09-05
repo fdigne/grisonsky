@@ -81,7 +81,8 @@ public class RentService {
         renter.setBill(bill);
         this.renterDao.save(renter);
         if (! paid){
-            this.modificationDao.save(new Modification(user, "Location de "+rent.getClient().getName()+" modifiée", new Date()));
+            Modification modification = this.modificationDao.save(new Modification(user, "Location de "+rent.getClient().getName()+" modifiée", new Date()));
+            this.sendEmail(this.toEmail,"[JLP] : " + modification.getMessage(), modification, savedRent);
         }
         return savedRent;
     }
@@ -103,7 +104,7 @@ public class RentService {
         this.renterDao.save(user);
         Modification modification = this.modificationDao.save(new Modification(user, "Nouvelle location ajoutée", new Date()));
 
-        this.sendEmail(this.toEmail,"[JLP] : " + modification.getMessage(), modification);
+        this.sendEmail(this.toEmail,"[JLP] : " + modification.getMessage(), modification, rent);
 
         return savedRent;
     }
@@ -113,7 +114,8 @@ public class RentService {
         Rent rent = this.rentDao.findOne(rentId);
         Renter renter = rent.getRenter();
         Bill bill = renter.getBill();
-        this.modificationDao.save(new Modification(user, "Location supprimée", new Date()));
+        Modification modification = this.modificationDao.save(new Modification(user, "Location supprimée", new Date()));
+        this.sendEmail(this.toEmail,"[JLP] : " + modification.getMessage(), modification, rent);
         this.rentDao.delete(rentId);
         Double oldService = this.rentDao.getServiceSumByRenterId(rent.getRenter().getId(), new Date());
         Double service = ((oldService != null ? oldService : 0))*0.1;
@@ -133,7 +135,7 @@ public class RentService {
      * @param toEmail
      * @param subject
      */
-    public void sendEmail(String toEmail, String subject, Modification modification){
+    public void sendEmail(String toEmail, String subject, Modification modification, Rent rent){
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -150,7 +152,7 @@ public class RentService {
             }
         };
         Session session = Session.getInstance(props, auth);
-        String body = this.getBodyEmail(modification);
+        String body = this.getBodyEmail(modification, rent);
         try
         {
             MimeMessage msg = new MimeMessage(session);
@@ -159,7 +161,7 @@ public class RentService {
             msg.addHeader("format", "flowed");
             msg.addHeader("Content-Transfer-Encoding", "8bit");
 
-            msg.setFrom(new InternetAddress("fdigne@me.com"));
+            msg.setFrom(new InternetAddress("grisonsky@gmail.com"));
 
             msg.setSubject(subject, "UTF-8");
             // Send the actual HTML message, as big as you like
@@ -176,7 +178,7 @@ public class RentService {
         }
     }
 
-    private String getBodyEmail(Modification modification) {
+    private String getBodyEmail(Modification modification, Rent rent) {
 
         String body = "<html>\n" +
                 "<head>\n" +
@@ -198,7 +200,8 @@ public class RentService {
         body += "Salut soldat !<br/><br/>";
 
         body += "Il y a eu du nouveau sur les locations de "+modification.getRenter().getName()+"<br/><br/>" ;
-        body += "L'action suivante a été effectuée : "+modification.getMessage();
+        body += "L'action suivante a été effectuée : "+ modification.getMessage();
+        body += "<br/><br/>La location concernée est celle de "+ rent.getClient().getName()+" le "+new SimpleDateFormat("dd-MM-yyyy").format(rent.getPeriod().getStartDate());
         body += "<br/><br/>Bises.<br/>Lord of Pibrac.<br/><br/><br/>";
         return body;
     }

@@ -2,7 +2,7 @@ package app.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name="Period")
@@ -13,15 +13,15 @@ public class Period implements Serializable {
     private Long id;
 
     @Column(name="start_date")
-    private Date startDate;
+    private Timestamp startDate;
 
     @Column(name="end_date")
-    private Date endDate;
+    private Timestamp endDate;
 
     public Period() {
     }
 
-    public Period(Date startDate, Date endDate) {
+    public Period(Timestamp startDate, Timestamp endDate) {
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -34,19 +34,19 @@ public class Period implements Serializable {
         this.id = id;
     }
 
-    public Date getStartDate() {
+    public Timestamp getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(Timestamp startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public Timestamp getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(Timestamp endDate) {
         this.endDate = endDate;
     }
 }
