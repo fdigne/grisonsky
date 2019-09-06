@@ -58,6 +58,16 @@ public class RentService {
         }
     }
 
+    public List<Rent> getFutureRentsByRenterId(Long id) {
+        Renter renter = this.renterDao.getOne(id);
+        if(renter.isAdmin()) {
+            return this.rentDao.findAllFuture(new Date());
+        }
+        else {
+            return this.rentDao.getFutureRentsByRenterId(id, new Date());
+        }
+    }
+
 
     public Rent getOne(Long id) {
         return this.rentDao.getOne(id);

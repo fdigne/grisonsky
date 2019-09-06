@@ -25,6 +25,12 @@ public class RentController {
         return this.rentService.getRentsByRenterId(id);
     }
 
+    @GetMapping(value="/future/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public List<Rent> getFutureRentsByRenterId(@PathVariable Long id) {
+        return this.rentService.getFutureRentsByRenterId(id);
+    }
+
     @GetMapping(value="/{id}")
     public Rent getOne(@PathVariable Long id) {
         return this.rentService.getOne(id);
