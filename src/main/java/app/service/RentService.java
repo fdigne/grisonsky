@@ -13,10 +13,7 @@ import app.domain.Rent;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.math.BigInteger;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -29,7 +26,7 @@ public class RentService {
     private static final int CLEANING_PRICE = 50;
     private final String fromEmail = "grisonsky@gmail.com"; //requires valid gmail id
     private final String password = "jlp_Grisonsky!"; // correct password for gmail id
-    private final String toEmail = "fdigne@me.com"; //requires valid gmail id
+    private final String toEmail = "jules.grison@gmail.com"; //requires valid gmail id
 
 
 
@@ -201,6 +198,7 @@ public class RentService {
         body += "Il y a eu du nouveau sur les locations de "+modification.getRenter().getName()+"<br/><br/>" ;
         body += "L'action suivante a été effectuée : "+ modification.getMessage();
         body += "<br/><br/>La location concernée est celle de "+ rent.getClient().getName()+" le "+new SimpleDateFormat("dd-MM-yyyy").format(rent.getPeriod().getStartDate());
+        body += "<br/><br/>Clique sur le  lien suivant : <a href=\"http://vps513398.ovh.net:8080\">Grisonsky Website</a>";
         body += "<br/><br/>Bises.<br/>Lord of Pibrac.<br/><br/><br/>";
         return body;
     }
