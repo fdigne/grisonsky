@@ -51,7 +51,7 @@ public class RentService {
     public List<Rent> getRentsByRenterId(Long id) {
         Renter renter = this.renterDao.getOne(id);
         if (renter.isAdmin()) {
-            return this.rentDao.findAll();
+            return this.rentDao.findAllOrderByDate();
         }
         else {
             return this.rentDao.getRentsByRenterId(id);

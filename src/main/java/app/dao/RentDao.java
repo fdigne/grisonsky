@@ -18,4 +18,7 @@ public interface RentDao extends JpaRepository<Rent, Long> {
 
     @Query(value="select count(*) from Rent o where o.renter.id=:x and o.cleaning=true and o.period.endDate <:y and o.paid=false")
     int getCleaningCountByRenterId(@Param("x") Long id, @Param("y") Date date);
+
+    @Query(value="select o from Rent o order by o.period.startDate asc")
+    List<Rent> findAllOrderByDate();
 }
