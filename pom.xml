@@ -81,10 +81,11 @@
                         <phase>validate</phase>
                         <goals><goal>copy-resources</goal></goals>
                         <configuration>
-                            <outputDirectory>${build.directory}/classes/static/</outputDirectory >
+                            <outputDirectory>${build.directory}/classes/static</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>../grisonsky_frontend/dist</directory>
+
+                                    <directory>../grisonsky_frontend/grisonsky/dist/*</directory>
                                 </resource>
                             </resources>
                         </configuration>

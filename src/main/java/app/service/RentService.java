@@ -198,7 +198,7 @@ public class RentService {
         body += "Il y a eu du nouveau sur les locations de "+modification.getRenter().getName()+"<br/><br/>" ;
         body += "L'action suivante a été effectuée : "+ modification.getMessage();
         body += "<br/><br/>La location concernée est celle de "+ rent.getClient().getName()+" le "+new SimpleDateFormat("dd-MM-yyyy").format(rent.getPeriod().getStartDate());
-        body += "<br/><br/>Clique sur le  lien suivant : <a href=\"http://vps513398.ovh.net:8080\">Grisonsky Website</a>";
+        body += "<br/><br/>Clique sur le  lien suivant : <a href=\"http://vps513398.ovh.net:9090\">Grisonsky Website</a>";
         body += "<br/><br/>Bises.<br/>Lord of Pibrac.<br/><br/><br/>";
         return body;
     }

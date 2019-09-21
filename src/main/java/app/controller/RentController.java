@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/rent")
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class RentController {
 
 
@@ -20,7 +20,7 @@ public class RentController {
     private RentService rentService;
 
     @GetMapping(value="/all/{id}")
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "*")
     public List<Rent> getRentsByRenterId(@PathVariable Long id) {
         return this.rentService.getRentsByRenterId(id);
     }
@@ -47,7 +47,7 @@ public class RentController {
     }
 
     @PutMapping(value="/{userId}")
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = "*")
     public Rent putRent(@RequestBody Rent rent, @PathVariable Long userId){
         return this.rentService.updateRent(rent, false, userId);
     }
